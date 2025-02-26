@@ -4,6 +4,7 @@ set -x
 
 FTB_GAME_ID=128
 FTB_SERVER_VERSION=100033
+VERSION_TAG=1.3.0
 
 cd /data
 
