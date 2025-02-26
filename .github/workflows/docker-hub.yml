@@ -18,7 +18,7 @@ jobs:
       - name: Extract SERVER_VERSION from launch.sh
         id: extract-version
         run: |
-          SERVER_VERSION=$(grep 'SERVER_VERSION=' launch.sh | cut -d '=' -f2)
+          SERVER_VERSION=$(grep 'VERSION_TAG=' launch.sh | cut -d '=' -f2)
           echo "SERVER_VERSION=$SERVER_VERSION" >> $GITHUB_ENV
 
       - name: Log in to Docker Hub
