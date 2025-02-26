@@ -2,8 +2,9 @@
 
 set -x
 
-NEOFORGE_VERSION=21.1.119
-SERVER_VERSION=2.36
+FTB_GAME_ID=128
+FTB_SERVER_VERSION=100033
+
 cd /data
 
 if ! [[ "$EULA" = "false" ]]; then
@@ -13,21 +14,11 @@ else
     exit 99
 fi
 
-if ! [[ -f "Server-Files-$SERVER_VERSION.zip" ]]; then
+if ! [[ -f "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}" ]]; then
     rm -fr config defaultconfigs kubejs mods packmenu Server-Files-* neoforge*
-    curl -Lo "Server-Files-$SERVER_VERSION.zip" "https://edge.forgecdn.net/files/6201/484/ServerFiles-$SERVER_VERSION.zip" || exit 9
-    unzip -u -o "Server-Files-$SERVER_VERSION.zip" -d /data
-    DIR_TEST="ServerFiles-$SERVER_VERSION"
-    if [[ $(find . -type d -maxdepth 1 | wc -l) -gt 1 ]]; then
-        cd "${DIR_TEST}"
-        find . -type d -exec chmod 777 {} +
-        mv -f * /data
-        cd /data
-        rm -fr "$DIR_TEST"
-    fi
-    
-    curl -Lo neoforge-${NEOFORGE_VERSION}-installer.jar https://maven.neoforged.net/releases/net/neoforged/neoforge/$NEOFORGE_VERSION/neoforge-$NEOFORGE_VERSION-installer.jar
-    java -jar neoforge-${NEOFORGE_VERSION}-installer.jar --installServer
+    curl -Lo "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}" "https://api.feed-the-beast.com/v1/modpacks/public/modpack/${FTB_GAME_ID}/${FTB_SERVER_VERSION}/server/linux" || exit 9
+    chmod +x "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}"
+    ./Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION} --auto --dir /data --force --no-java --pack ${FTB_GAME_ID} --version ${FTB_SERVER_VERSION}
 fi
 
 if [[ -n "$JVM_OPTS" ]]; then
