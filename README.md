@@ -15,6 +15,14 @@
 
 ## Description
 
+!! IMPORTANT !!
+
+I will likely no longer update this. You should try flobernd's FTB docker image, it has auto-update!
+
+https://github.com/flobernd/docker-minecraft-ftb
+
+
+
 This container is built to run on an [Unraid](https://unraid.net) server, outside of that your mileage will vary.
 
 The docker on the first run will download the same version as tagged `OceanBlock2-1.11.1` and install it.  This can take a while as the Forge installer can take a bit to complete.  You can watch the logs and it will eventually finish.

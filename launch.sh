@@ -16,7 +16,7 @@ else
 fi
 
 if ! [[ -f "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}" ]]; then
-    rm -fr config defaultconfigs kubejs mods libraries resourcepacks shaderpacks packmenu Server-Files-* neoforge*
+    rm -frv config defaultconfigs kubejs mods libraries resourcepacks shaderpacks packmenu Server-Files-* neoforge*
     curl -Lo "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}" "https://api.feed-the-beast.com/v1/modpacks/public/modpack/${FTB_GAME_ID}/${FTB_SERVER_VERSION}/server/linux" || exit 9
     chmod +x "Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION}"
     ./Server-Files-${FTB_GAME_ID}_${FTB_SERVER_VERSION} --auto --dir /data --force --no-java --pack ${FTB_GAME_ID} --version ${FTB_SERVER_VERSION}
